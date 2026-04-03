@@ -24,9 +24,16 @@ import SlotFilter  from './components/SlotFilter'
 import SearchBar   from './components/SearchBar'
 import ModList     from './components/ModList'
 import { useMods } from './hooks/useMods'
+import { pingBackend } from './services/api'
 
 export default function App() {
   const [selectedSlot, setSelectedSlot] = useState(null)
+
+  // Ping the backend the moment the app loads so Render wakes up
+  // before the user actually needs it. Fire and forget — no await.
+  useEffect(() => {
+    pingBackend()
+  }, [])
 
   const {
     groupedFamilies,
