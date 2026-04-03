@@ -1,33 +1,18 @@
 # PoE Craft Regex
 
 A Path of Exile crafting bench regex builder — visually select mods from the
-crafting bench and instantly generate a regex string to paste into your stash
-search.
+crafting bench and instantly generate a regex string to paste into your crafting
+bench.
 
 ## Stack
 
 | Layer    | Technology          |
 |----------|---------------------|
-| Frontend | React + Tailwind CSS |
+| Frontend | React + Tailwind CSS|
 | Backend  | Python + FastAPI    |
 | Data     | JSON (mod dataset)  |
 | Hosting  | Vercel + Render     |
 
-## Project Structure
-
-```
-poe-craft-regex/
-├── backend/          # FastAPI Python API
-│   ├── main.py
-│   ├── requirements.txt
-│   ├── data/
-│   │   └── crafting_bench_mods.json
-│   └── app/
-│       ├── models/
-│       ├── routers/
-│       └── services/
-└── frontend/         # React app (coming soon)
-```
 
 ## Running the Backend Locally
 
@@ -47,6 +32,17 @@ API docs available at: http://localhost:8000/docs
 cd backend
 pytest tests/ -v
 ```
+
+## Running the Frontend Locally
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+You should see the App at: http://localhost:5173
+Make sure your backend is also running in a separate terminal
 
 ## API Endpoints
 
