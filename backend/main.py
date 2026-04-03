@@ -24,7 +24,11 @@ app = FastAPI(
 # ---------------------------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite default dev port
+    allow_origins=[
+        "http://localhost:5173",                        # local dev
+        "https://poe-craft-regex.vercel.app",           # your Vercel URL
+        "https://poe-craft-regex-*.vercel.app",         # Vercel preview URLs
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
