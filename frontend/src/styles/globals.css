@@ -1,0 +1,340 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    background-color: #0d0b08;
+    color: #c0b090;
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #0d0b08; }
+  ::-webkit-scrollbar-thumb { background: #3a2e1a; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #c8a850; }
+}
+
+@layer components {
+  /* ── Gold divider ── */
+  .poe-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #5a4820, #c8a850, #5a4820, transparent);
+    opacity: 0.5;
+    margin: 0;
+  }
+
+  /* ── Section header (- Prefix - style) ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    background: #0d0b08;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c8a850;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .section-header::before,
+  .section-header::after {
+    content: '—';
+    opacity: 0.4;
+    font-family: serif;
+  }
+
+  /* ── Slot icon filter button ── */
+  .slot-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2a2010;
+    background: #130f09;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    font-size: 0.65rem;
+    font-family: 'Cinzel', serif;
+    color: #6b5f45;
+    position: relative;
+  }
+  .slot-btn:hover {
+    border-color: #5a4820;
+    color: #c0b090;
+    background: #1a1409;
+  }
+  .slot-btn.active {
+    border-color: #c8a850;
+    color: #e8c870;
+    background: #1e1a0e;
+    box-shadow: 0 0 6px rgba(200,168,80,0.2);
+  }
+  .slot-btn.all-btn {
+    font-size: 1rem;
+    color: #8a7040;
+  }
+  .slot-btn.all-btn.active {
+    color: #e8c870;
+  }
+
+  /* ── Search bar ── */
+  .search-bar {
+    width: 100%;
+    background: #0a0804;
+    border: 1px solid #2a2010;
+    border-radius: 2px;
+    padding: 0.4rem 0.75rem;
+    font-family: 'Crimson Text', serif;
+    font-size: 0.95rem;
+    color: #c0b090;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-bar::placeholder { color: #3a3020; }
+  .search-bar:focus { border-color: #5a4820; }
+
+  /* ── Mod row ── */
+  .mod-row {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: start;
+    gap: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    border-bottom: 1px solid #161208;
+    cursor: pointer;
+    transition: background 0.1s;
+    min-height: 36px;
+  }
+  .mod-row:hover { background: #161208; }
+  .mod-row.selected { background: #1a1509; }
+  .mod-row.selected .mod-name { color: #e8c870; }
+
+  /* ── Tier badge ── */
+  .tier-badge {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #3a2e1a;
+    background: #0d0b08;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: #8a7040;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mod-row.selected .tier-badge {
+    border-color: #c8a850;
+    color: #c8a850;
+  }
+
+  /* ── Mod name ── */
+  .mod-name {
+    font-size: 0.88rem;
+    color: #a89870;
+    line-height: 1.35;
+    white-space: pre-line;  /* renders \n as line breaks for combo mods */
+  }
+
+  
+
+  /* ── Tag pill ── */
+  .tag-pill {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 1px;
+    border: 1px solid;
+    white-space: nowrap;
+    align-self: start;
+    margin-top: 3px;
+  }
+  .tag-prefix  { color: #7a9060; border-color: #3a4820; }
+  .tag-suffix  { color: #607890; border-color: #203848; }
+  .tag-other   { color: #906070; border-color: #482030; }
+
+  /* ── Sticky regex bar ── */
+  .regex-bar {
+    border-top: 1px solid #2a2010;
+    background: #0d0b08;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 56px;
+  }
+
+  .regex-text {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.82rem;
+    color: #e8c870;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: normal;
+  }
+
+  .regex-placeholder {
+    font-family: 'Crimson Text', serif;
+    font-size: 0.85rem;
+    color: #3a3020;
+    font-style: italic;
+    flex: 1;
+  }
+
+  .copy-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid #c8a850;
+    color: #c8a850;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover { background: rgba(200,168,80,0.1); }
+  .copy-btn.copied { border-color: #6a9e6a; color: #6a9e6a; }
+  .copy-btn:disabled { opacity: 0.3; cursor: default; }
+
+  .clear-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid #3a2010;
+    color: #6a4030;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .clear-btn:hover { border-color: #8b3020; color: #b06050; }
+
+  .non-unique-warn {
+    font-size: 0.7rem;
+    color: #9a7830;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+  
+
+  /* ── Indented lower tiers ── */
+  .tier-indent {
+    border-left: 2px solid #1e1810;
+    margin-left: 0.75rem;
+    background: #0b0906;
+  }
+  .tier-indent .mod-row {
+    opacity: 0.85;
+  }
+  .tier-indent .mod-row:hover,
+  .tier-indent .mod-row.selected {
+    opacity: 1;
+  }
+
+  /* ── Expandable family row ── */
+  .mod-row.expandable {
+    cursor: pointer;
+  }
+
+  /* ── Expand arrow (inline, right side of row) ── */
+  .expand-arrow {
+    font-size: 0.5rem;
+    color: #4a3e28;
+    flex-shrink: 0;
+    display: inline-block;
+    transition: transform 0.18s ease, color 0.15s;
+    margin-top: 3px;
+  }
+  .mod-row:hover .expand-arrow { color: #8a7040; }
+  .expand-arrow.open {
+    transform: rotate(90deg);
+    color: #c8a850;
+  }
+
+  /* ── Indented lower tiers ── */
+  .tier-indent {
+    border-left: 2px solid #1e1810;
+    margin-left: 0.75rem;
+    background: #0b0906;
+  }
+  .tier-indent .mod-row { opacity: 0.85; }
+  .tier-indent .mod-row:hover,
+  .tier-indent .mod-row.selected { opacity: 1; }
+
+  /* ── Slot icon images ── */
+  .slot-icon-img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: brightness(0.55) sepia(0.3);
+    transition: filter 0.15s;
+    image-rendering: crisp-edges;
+  }
+  .slot-btn:hover .slot-icon-img,
+  .slot-btn.active .slot-icon-img {
+    filter: brightness(1) sepia(0.15);
+  }
+
+  /* Text fallback when image is missing */
+  .slot-icon-fallback {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    color: #6b5f45;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.03em;
+  }
+  .slot-btn.active .slot-icon-fallback { color: #e8c870; }
+
+  /* ∞ all-slots label */
+  .all-label {
+    font-size: 1.1rem;
+    color: #5a4820;
+    transition: color 0.15s;
+    line-height: 1;
+  }
+  .slot-btn.active .all-label,
+  .slot-btn:hover .all-label { color: #e8c870; }
+
+  /* 1H / 2H weapon badge */
+  .slot-badge {
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.42rem;
+    color: #c8a850;
+    background: #0a0804;
+    padding: 0 2px;
+    line-height: 1.3;
+    border: 1px solid #2a2010;
+    pointer-events: none;
+  }
